@@ -1,19 +1,21 @@
 {
-    "compilerOptions": {
-        "outDir": "./condensedinlinepanel/static/condensedinlinepanel/compiled/",
-        "sourceMap": true,
-        "noImplicitAny": true,
-        "strictNullChecks": true,
-        "module": "commonjs",
-        "target": "es5",
-        "jsx": "react"
-    },
-    "files": [
-        "./condensedinlinepanel/static/condensedinlinepanel/src/condensedinlinepanel.tsx",
-        "./condensedinlinepanel/static/condensedinlinepanel/src/types.ts",
-        "./condensedinlinepanel/static/condensedinlinepanel/src/state.ts",
-        "./condensedinlinepanel/static/condensedinlinepanel/src/components/Card.tsx",
-        "./condensedinlinepanel/static/condensedinlinepanel/src/components/Gap.tsx",
-        "./condensedinlinepanel/static/condensedinlinepanel/src/components/CardSet.tsx"
-    ]
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "skipLibCheck": false,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["condensedinlinepanel/static/condensedinlinepanel/src"],
+  "references": [{ "path": "./tsconfig.node.json" }],
 }

@@ -2,7 +2,10 @@ npm_deps:
 	yarn install
 
 build: npm_deps
-	./node_modules/.bin/webpack -p --config webpack.prod.js
+	npm run build
 
 dev: npm_deps
-	./node_modules/.bin/webpack -w --config webpack.dev.js
+	npm run dev
+
+check: npm_deps
+	npm run dev:check

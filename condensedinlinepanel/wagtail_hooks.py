@@ -11,9 +11,9 @@ else:
 
 @hooks.register('insert_editor_js')
 def editor_js():
-    return '<script src="{0}"></script>'.format(static('condensedinlinepanel/dist/condensedinlinepanel.bundle.js'))
+    return '<script src="{0}"></script>'.format(static('condensedinlinepanel/dist/condensedinlinepanel.iife.js'))
 
 
 @hooks.register('insert_editor_css')
 def editor_css():
-    return '<link rel="stylesheet" href="{0}">'.format(static('condensedinlinepanel/dist/condensedinlinepanel.css'))
+    return '<link rel="stylesheet" href="{0}">'.format(static('condensedinlinepanel/dist/style.css'))
