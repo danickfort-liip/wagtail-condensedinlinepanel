@@ -6,9 +6,9 @@ import {Form, FieldError} from '../types';
 import {FormContainer} from './FormContainer';
 
 export type customiseActionsFn = (props: CardProps, actions: any[]) => void;
-export type onEditStartFn = (e: MouseEvent) => boolean;
-export type onEditCloseFn = (e: MouseEvent, newFields: {[name: string]: any;}) => boolean;
-export type onDeleteFn = (e: MouseEvent) => boolean;
+export type onEditStartFn = (e: React.MouseEvent) => boolean;
+export type onEditCloseFn = (e: React.MouseEvent, newFields: {[name: string]: any;}) => boolean;
+export type onDeleteFn = (e: React.MouseEvent) => boolean;
 export type renderCardHeaderFn = (form: Form) => {__html: string};
 
 export interface CardProps {
@@ -95,11 +95,11 @@ export class Card extends React.Component<CardProps, CardState> {
 
     // Actions
 
-    onEditStart(e: MouseEvent) {
+    onEditStart(e: React.MouseEvent) {
         return this.props.onEditStart(e);
     }
 
-    onEditClose(e: MouseEvent) {
+    onEditClose(e: React.MouseEvent) {
         let newFields: {[name: string]: string;} = {};
 
         for (let fieldName in this.props.form.fields) {
@@ -113,21 +113,21 @@ export class Card extends React.Component<CardProps, CardState> {
         return this.props.onEditClose(e, newFields);
     }
 
-    onDelete(e: MouseEvent) {
+    onDelete(e: React.MouseEvent) {
         this.setState({showDeleteConfirm: true});
 
         e.preventDefault();
         return false;
     }
 
-    onDeleteCancel(e: MouseEvent) {
+    onDeleteCancel(e: React.MouseEvent) {
         this.setState({showDeleteConfirm: false});
 
         e.preventDefault();
         return false;
     }
 
-    onDeleteConfirm(e: MouseEvent) {
+    onDeleteConfirm(e: React.MouseEvent) {
         return this.props.onDelete(e);
     }
 

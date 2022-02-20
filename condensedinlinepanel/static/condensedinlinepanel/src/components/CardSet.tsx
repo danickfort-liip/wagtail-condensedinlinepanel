@@ -60,7 +60,7 @@ export class CardSet extends React.Component<CardSetProps, {}> {
 
             // Event handlers
 
-            let onEditStart = (e: MouseEvent) => {
+            let onEditStart = (e: React.MouseEvent) => {
                 /* Fired when the user clicks the "edit" button on the card */
 
                 // Start editing the card
@@ -77,7 +77,7 @@ export class CardSet extends React.Component<CardSetProps, {}> {
                 return false;
             };
 
-            let onDelete = (e: MouseEvent) => {
+            let onDelete = (e: React.MouseEvent) => {
                 /* Fired when the user clicks the "delete" button on the card */
 
                 // Set "DELETE" field
@@ -93,7 +93,7 @@ export class CardSet extends React.Component<CardSetProps, {}> {
                 return false;
             };
 
-            let onEditClose = (e: MouseEvent, newFields: {[name: string]: string;}) => {
+            let onEditClose = (e: React.MouseEvent, newFields: {[name: string]: string;}) => {
                 /* Fired when the user clicks the "close" button in the form */
 
                 // Save the form data

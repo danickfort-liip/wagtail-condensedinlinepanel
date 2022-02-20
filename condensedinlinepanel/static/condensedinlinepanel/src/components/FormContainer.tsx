@@ -16,6 +16,8 @@ export interface FormContainerProps {
 }
 
 export class FormContainer extends React.Component<FormContainerProps, {}> {
+    formElementRef: React.RefObject<HTMLDivElement> = React.createRef();
+
     getHtml() {
         return {
             __html: this.props.template.replace(/__prefix__/g, this.props.form.id.toString())
@@ -23,7 +25,11 @@ export class FormContainer extends React.Component<FormContainerProps, {}> {
     }
 
     render() {
-        return <div className="condensed-inline-panel__form" dangerouslySetInnerHTML={this.getHtml()} />;
+        return <div
+            className="condensed-inline-panel__form"
+            dangerouslySetInnerHTML={this.getHtml()}
+            ref={this.formElementRef}
+        />;
     }
 
     componentDidMount() {
@@ -31,7 +37,10 @@ export class FormContainer extends React.Component<FormContainerProps, {}> {
         initialises all of the components in the form */
 
         // Find form element
-        let formElement = ReactDOM.findDOMNode(this);
+        let formElement = this.formElementRef.current;
+        if (!formElement) {
+            throw Error("Cannot find form element")
+        }
 
         // Copy field data into the form
         for (let fieldName in this.props.form.fields) {
@@ -71,17 +80,12 @@ export class FormContainer extends React.Component<FormContainerProps, {}> {
         }
 
         // Run any script tags embedded in the form HTML
-        let scriptTags = formElement.getElementsByTagName('script');
-        for (let i = 0; i < scriptTags.length; i++) {
-            let scriptTag = scriptTags.item(i);
-
+        formElement.querySelectorAll('script').forEach((scriptTag) => {
             eval(scriptTag.innerHTML);
-        }
+        });
 
         // HACK: Make page choosers work
-        let pageChoosers = formElement.getElementsByClassName('page-chooser');
-        for (let i = 0; i < pageChoosers.length; i++) {
-            let pageChooser = pageChoosers.item(i);
+        formElement.querySelectorAll('.page-chooser').forEach((pageChooser) => {
             let match = pageChooser.id.match(/id_[^-]*-\d+-([^-]*)-chooser/);
 
             if (match) {
@@ -97,12 +101,10 @@ export class FormContainer extends React.Component<FormContainerProps, {}> {
                     pageChooser.getElementsByClassName('title')[0].textContent = this.props.form.extra[fieldName]['title'];
                 }
             }
-        }
+        });
 
         // HACK: Make image choosers work
-        let imageChoosers = formElement.getElementsByClassName('image-chooser');
-        for (let i = 0; i < imageChoosers.length; i++) {
-            let imageChooser = imageChoosers.item(i);
+        formElement.querySelectorAll('.image-chooser').forEach((imageChooser) => {
             let match = imageChooser.id.match(/id_[^-]*-\d+-([^-]*)-chooser/);
 
             if (match) {
@@ -124,12 +126,10 @@ export class FormContainer extends React.Component<FormContainerProps, {}> {
                     }
                 }
             }
-        }
+        });
 
         // HACK: Make snippet choosers work
-        let snippetChoosers = formElement.getElementsByClassName('snippet-chooser');
-        for (let i = 0; i < snippetChoosers.length; i++) {
-            let snippetChooser = snippetChoosers.item(i);
+        formElement.querySelectorAll('.snippet-chooser').forEach((snippetChooser) => {
             let match = snippetChooser.id.match(/id_[^-]*-\d+-([^-]*)-chooser/);
 
             if (match) {
@@ -145,12 +145,10 @@ export class FormContainer extends React.Component<FormContainerProps, {}> {
                     snippetChooser.getElementsByClassName('title')[0].textContent = this.props.form.extra[fieldName]['title'];
                 }
             }
-        }
+        });
 
         // HACK: Make document choosers work
-        let documentChoosers = formElement.getElementsByClassName('document-chooser');
-        for (let i = 0; i < documentChoosers.length; i++) {
-            let documentChooser = documentChoosers.item(i);
+        formElement.querySelectorAll('.document-chooser').forEach((documentChooser) => {
             let match = documentChooser.id.match(/id_[^-]*-\d+-([^-]*)-chooser/);
 
             if (match) {
@@ -166,6 +164,6 @@ export class FormContainer extends React.Component<FormContainerProps, {}> {
                     documentChooser.getElementsByClassName('title')[0].textContent = this.props.form.extra[fieldName]['title'];
                 }
             }
-        }
+        });
     }
 }
