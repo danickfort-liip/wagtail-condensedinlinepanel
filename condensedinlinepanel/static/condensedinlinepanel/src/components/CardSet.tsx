@@ -1,7 +1,7 @@
 import {Store} from 'redux';
 import * as React from 'react';
-import {DragSource, DropTarget, DragDropContext} from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import {DndProvider} from 'react-dnd';
+import {HTML5Backend} from 'react-dnd-html5-backend';
 
 import {Form} from '../types';
 import {State} from '../state';
@@ -187,5 +187,8 @@ export class CardSet extends React.Component<CardSetProps, {}> {
     }
 }
 
-// FIXME: Had to remove type because of https://github.com/gaearon/react-dnd/issues/581
-export let DNDCardSet: React.ComponentClass<CardSetProps> = DragDropContext(HTML5Backend)(CardSet);
+export function DNDCardSet(props: CardSetProps) {
+    return <DndProvider backend={HTML5Backend}>
+        <CardSet {...props}/>
+    </DndProvider>
+}
