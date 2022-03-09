@@ -1,7 +1,7 @@
 import {Store} from 'redux';
 import * as React from 'react';
 import {DndProvider} from 'react-dnd';
-import {HTML5Backend} from 'react-dnd-html5-backend';
+import {TouchBackend} from 'react-dnd-touch-backend';
 
 import {Form} from '../types';
 import {State} from '../state';
@@ -188,7 +188,7 @@ export class CardSet extends React.Component<CardSetProps, {}> {
 }
 
 export function DNDCardSet(props: CardSetProps) {
-    return <DndProvider backend={HTML5Backend}>
+    return <DndProvider backend={TouchBackend}>
         <CardSet {...props}/>
     </DndProvider>
 }
